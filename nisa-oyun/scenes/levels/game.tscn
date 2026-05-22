@@ -1,37 +1,100 @@
 [gd_scene format=3 uid="uid://d0gn613351e27"]
 
+[ext_resource type="Texture2D" uid="uid://b8bvtyuyv0vbv" path="res://assets/nisa/nisa_climb1.png" id="1_7rg7d"]
+[ext_resource type="Script" uid="uid://d2aa27v3vdgf2" path="res://scripts/nisa/nisa_controller.gd" id="1_cx7qy"]
 [ext_resource type="Texture2D" uid="uid://cm2gyhyt1tvat" path="res://assets/nisa/nisa.png" id="1_e6yxx"]
 [ext_resource type="Texture2D" uid="uid://bton3mgbnloup" path="res://assets/nisa/nisa_walk1.png" id="2_61jgc"]
+[ext_resource type="Texture2D" uid="uid://dpe3n0axs3hv6" path="res://assets/nisa/nisa_climb2.png" id="2_xmnyv"]
+[ext_resource type="Texture2D" uid="uid://clwhwooet48lh" path="res://assets/nisa/nisa_hurt.png" id="3_cx7qy"]
 [ext_resource type="Texture2D" uid="uid://c73myf5fpjh2" path="res://assets/nisa/nisa_walk2.png" id="3_riktp"]
+[ext_resource type="Texture2D" uid="uid://w2isbmegytpq" path="res://assets/nisa/nisa_jump.png" id="5_uk881"]
+[ext_resource type="Texture2D" uid="uid://deioc71y3d265" path="res://assets/Tiles/Double/block_red.png" id="8_xmnyv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2exa0"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_e6yxx")
+"texture": ExtResource("1_7rg7d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xmnyv")
 }],
 "loop": true,
+"name": &"climb",
+"speed": 2.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_cx7qy")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_e6yxx")
+}],
+"loop": false,
 "name": &"idle",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_61jgc")
+"texture": ExtResource("5_uk881")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 5.0
 }, {
+"frames": [{
 "duration": 1.0,
 "texture": ExtResource("3_riktp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_61jgc")
 }],
 "loop": true,
 "name": &"walk",
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cx7qy"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xmnyv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cx7qy"]
+size = Vector2(127.99999, 128)
+
 [node name="Game" type="Node2D" unique_id=1685804836]
 
-[node name="Nisa" type="Node2D" parent="." unique_id=1091005615]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2019256701]
+position = Vector2(1152, 648)
+zoom = Vector2(0.5, 0.5)
+
+[node name="Nisa" type="CharacterBody2D" parent="." unique_id=979561]
+position = Vector2(1152, 576)
+script = ExtResource("1_cx7qy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Nisa" unique_id=1941968902]
-position = Vector2(0, -128)
+position = Vector2(0, -126)
 sprite_frames = SubResource("SpriteFrames_2exa0")
-animation = &"walk"
-frame_progress = 0.4488237
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Nisa" unique_id=415046493]
+position = Vector2(0, -120)
+scale = Vector2(6.28, 8.040003)
+shape = SubResource("CapsuleShape2D_cx7qy")
+
+[node name="Block" type="StaticBody2D" parent="." unique_id=582304601]
+position = Vector2(1120, 1024)
+scale = Vector2(10, 1)
+physics_material_override = SubResource("PhysicsMaterial_xmnyv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block" unique_id=1453585337]
+position = Vector2(0, 128)
+shape = SubResource("RectangleShape2D_cx7qy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Block" unique_id=921812320]
+position = Vector2(0, 128)
+texture = ExtResource("8_xmnyv")
