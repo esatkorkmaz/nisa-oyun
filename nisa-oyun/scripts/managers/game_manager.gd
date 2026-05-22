@@ -2,14 +2,16 @@ extends Node
 
 signal coins_changed(new_value: int)
 signal lives_changed(new_value: int)
-signal game_over()
+signal game_lost()
 
+const _START_LIVES: int = 3
+const _START_COINS: int = 0
 const _MAX_LIVES: int = 5
 const _MIN_LIVES: int = 0
 const _MIN_COINS: int = 0
 
-var _coins: int = 0
-var _lives: int = 3
+var _coins: int = _START_COINS
+var _lives: int = _START_LIVES
 
 var coins: int:
 	get:
@@ -26,7 +28,7 @@ var lives: int:
 		_lives = clamp(value, _MIN_LIVES, _MAX_LIVES)
 		lives_changed.emit(_lives)
 		if _lives <= 0 and old_lives > 0:
-			game_over.emit()
+			game_lost.emit()
 
 func add_coins(amount: int) -> void:
 	if amount <= 0:
@@ -45,5 +47,8 @@ func add_life() -> void:
 func lose_life() -> void:
 	lives -= 1
 
-func reset_lives(amount: int = 3) -> void:
+func reset_lives(amount: int = _START_LIVES) -> void:
 	lives = amount
+	
+func reset_coins(amount: int = _START_COINS) -> void:
+	coins = amount

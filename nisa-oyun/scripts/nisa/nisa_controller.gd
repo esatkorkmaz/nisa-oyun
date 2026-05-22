@@ -54,8 +54,6 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, _speed)
 
 	move_and_slide()
-	_play_animation()
-	_rotate_sprite(-_hit_direction if _been_hit else (direction if _input_enabled else 0.0))
 	
 func hit(direction: float) -> void:
 	if(_been_hit):
@@ -76,24 +74,3 @@ func _can_jump() -> bool:
 	var coyote_ok = _coyote_timer > 0.0
 	var buffer_ok = _jump_buffer_timer > 0.0
 	return coyote_ok and buffer_ok
-
-func _play_animation() -> void:
-	if(_been_hit):
-		_animated_sprite.play("hurt")
-		return
-
-	if(velocity.y != 0):
-		_animated_sprite.play("jump")
-		return
-	elif(velocity.x != 0):
-		_animated_sprite.play("walk")
-		return
-	else:
-		_animated_sprite.play("idle")
-		return   
-		
-func _rotate_sprite(direction: float) -> void:
-	if(direction > 0):
-		_animated_sprite.scale.x = 1
-	elif(direction < 0):
-		_animated_sprite.scale.x = -1

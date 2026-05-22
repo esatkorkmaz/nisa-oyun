@@ -5,13 +5,16 @@
 [ext_resource type="Texture2D" uid="uid://cm2gyhyt1tvat" path="res://assets/nisa/nisa.png" id="1_e6yxx"]
 [ext_resource type="Script" uid="uid://sdndex3ywpxl" path="res://scripts/managers/ui_manager.gd" id="1_oi2tv"]
 [ext_resource type="Texture2D" uid="uid://bton3mgbnloup" path="res://assets/nisa/nisa_walk1.png" id="2_61jgc"]
+[ext_resource type="Texture2D" uid="uid://bj0sgkpaamobg" path="res://assets/nisa/game_lost.png" id="2_6370d"]
 [ext_resource type="Texture2D" uid="uid://dpe3n0axs3hv6" path="res://assets/nisa/nisa_climb2.png" id="2_xmnyv"]
 [ext_resource type="Texture2D" uid="uid://clwhwooet48lh" path="res://assets/nisa/nisa_hurt.png" id="3_cx7qy"]
+[ext_resource type="Texture2D" uid="uid://g1cxfgti3qy7" path="res://assets/nisa/game_win.png" id="3_fojqs"]
 [ext_resource type="Texture2D" uid="uid://c73myf5fpjh2" path="res://assets/nisa/nisa_walk2.png" id="3_riktp"]
 [ext_resource type="Texture2D" uid="uid://w2isbmegytpq" path="res://assets/nisa/nisa_jump.png" id="5_uk881"]
 [ext_resource type="Texture2D" uid="uid://deioc71y3d265" path="res://assets/Tiles/Double/block_red.png" id="8_xmnyv"]
 [ext_resource type="Script" uid="uid://coo5qhtw0ehlc" path="res://scripts/enemy/enemy_controller.gd" id="9_r0gsk"]
 [ext_resource type="Texture2D" uid="uid://csgi424dvkd3k" path="res://assets/Enemies/Double/bee_a.png" id="9_uk881"]
+[ext_resource type="Script" uid="uid://bauimun64ejv7" path="res://scripts/nisa/nisa_sprite.gd" id="12_bgnkb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_r0gsk"]
 font_size = 32
@@ -77,14 +80,16 @@ size = Vector2(127.99999, 128)
 
 [node name="Game" type="Node2D" unique_id=1685804836]
 
-[node name="UI" type="Node" parent="." unique_id=2019330513 node_paths=PackedStringArray("_lives_label", "_coins_label")]
+[node name="UIManager" type="Node" parent="." unique_id=2019330513 node_paths=PackedStringArray("_game_lost_node", "_game_win_node", "_lives_label", "_coins_label")]
 script = ExtResource("1_oi2tv")
+_game_lost_node = NodePath("CanvasLayer/HUD/GameLost")
+_game_win_node = NodePath("CanvasLayer/HUD/GameWin")
 _lives_label = NodePath("CanvasLayer/HUD/VBoxContainer/LivesLabel")
 _coins_label = NodePath("CanvasLayer/HUD/VBoxContainer/CoinsLabel")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="UI" unique_id=742140660]
+[node name="CanvasLayer" type="CanvasLayer" parent="UIManager" unique_id=742140660]
 
-[node name="HUD" type="Control" parent="UI/CanvasLayer" unique_id=481011419]
+[node name="HUD" type="Control" parent="UIManager/CanvasLayer" unique_id=481011419]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -92,7 +97,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/CanvasLayer/HUD" unique_id=330403098]
+[node name="VBoxContainer" type="VBoxContainer" parent="UIManager/CanvasLayer/HUD" unique_id=330403098]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -100,15 +105,70 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LivesLabel" type="Label" parent="UI/CanvasLayer/HUD/VBoxContainer" unique_id=737999376]
+[node name="LivesLabel" type="Label" parent="UIManager/CanvasLayer/HUD/VBoxContainer" unique_id=737999376]
 layout_mode = 2
 text = "Lives:"
 label_settings = SubResource("LabelSettings_r0gsk")
 
-[node name="CoinsLabel" type="Label" parent="UI/CanvasLayer/HUD/VBoxContainer" unique_id=386272824]
+[node name="CoinsLabel" type="Label" parent="UIManager/CanvasLayer/HUD/VBoxContainer" unique_id=386272824]
 layout_mode = 2
 text = "Coins"
 label_settings = SubResource("LabelSettings_r0gsk")
+
+[node name="GameLost" type="Control" parent="UIManager/CanvasLayer/HUD" unique_id=1099072280]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="UIManager/CanvasLayer/HUD/GameLost" unique_id=1690802385]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_6370d")
+expand_mode = 1
+
+[node name="RetryButton" type="Button" parent="UIManager/CanvasLayer/HUD/GameLost" unique_id=848409706]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -104.0
+offset_top = -135.25
+offset_right = 104.0
+offset_bottom = -73.25
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Tekrar Dene"
+language = "tr"
+
+[node name="GameWin" type="Control" parent="UIManager/CanvasLayer/HUD" unique_id=422499072]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="UIManager/CanvasLayer/HUD/GameWin" unique_id=523580971]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_fojqs")
+expand_mode = 1
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2019256701]
 position = Vector2(1152, 648)
@@ -126,6 +186,7 @@ script = ExtResource("1_cx7qy")
 position = Vector2(0, -126)
 sprite_frames = SubResource("SpriteFrames_2exa0")
 animation = &"idle"
+script = ExtResource("12_bgnkb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Nisa/NisaController" unique_id=415046493]
 position = Vector2(0, -120)
@@ -170,4 +231,5 @@ shape = SubResource("RectangleShape2D_cx7qy")
 position = Vector2(0, 128)
 texture = ExtResource("8_xmnyv")
 
+[connection signal="pressed" from="UIManager/CanvasLayer/HUD/GameLost/RetryButton" to="UIManager" method="_on_retry_button_pressed"]
 [connection signal="body_entered" from="Enemy/EnemyController" to="Enemy/EnemyController" method="_on_body_entered"]
