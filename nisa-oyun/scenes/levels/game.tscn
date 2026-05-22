@@ -200,7 +200,7 @@ collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_cx7qy")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Nisa/NisaController" unique_id=1941968902]
+[node name="NisaSprite" type="AnimatedSprite2D" parent="Nisa/NisaController" unique_id=1941968902]
 position = Vector2(0, -126)
 sprite_frames = SubResource("SpriteFrames_2exa0")
 animation = &"idle"
