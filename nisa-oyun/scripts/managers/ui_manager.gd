@@ -1,32 +1,60 @@
 extends Node
 
-@export var _game_lost_node: Control
-@export var _game_win_node: Control
+var game_manager: Node
 
-@export var _lives_label: Label
-@export var _coins_label: Label
-
-func _update_lives_label(new_value: int) -> void:
-	_lives_label.text = "Lives: %d" % new_value
-
-func _update_coins_label(new_value: int) -> void:
-	_coins_label.text = "Coins: %d" % new_value
+var _lives_label: Label
+var _coins_label: Label
+var _game_lost_node: Node
 
 func _ready() -> void:
-	_update_lives_label(game_manager.lives)
-	_update_coins_label(game_manager.coins)
-	
-	game_manager.lives_changed.connect(_update_lives_label)
-	game_manager.coins_changed.connect(_update_coins_label)
-	
-	game_manager.game_lost.connect(_show_game_lost_node)
+	connect_buttons()
 
+func connect_buttons() -> void:
+	for node in get_tree().get_nodes_in_group("ui_buttons"):
+		match node.name:
+			"RetryButton": node.pressed.connect(_on_retry_pressed)
+			"PlayButton": node.pressed.connect(_on_play_pressed)
+			"QuitButton": node.pressed.connect(_on_quit_pressed)
 
-func _on_retry_button_pressed() -> void:
-	game_manager.reset_lives()
-	game_manager.reset_coins()
+func connect_labels() -> void:
+	for node in get_tree().get_nodes_in_group("ui_labels"):
+		match node.name:
+			"LivesLabel": _lives_label = node
+			"CoinsLabel": _coins_label = node
 	
-	get_tree().reload_current_scene()
+	if game_manager == null:
+		return
 	
-func _show_game_lost_node() -> void:
+	_lives_label.text = "Lives: %d" % game_manager.lives
+	_coins_label.text = "Coins: %d" % game_manager.coins
+	
+	game_manager.lives_changed.connect(update_lives)
+	game_manager.coins_changed.connect(update_coins)
+
+func connect_nodes() -> void:
+	for node in get_tree().get_nodes_in_group("ui_nodes"):
+		match node.name:
+			"GameLostNode": _game_lost_node = node
+	
+	if game_manager == null:
+		return
+	
+	game_manager.game_lost.connect(show_game_lost_node)
+
+func update_lives(value: int) -> void:
+	_lives_label.text = "Lives: %d" % value
+
+func update_coins(value: int) -> void:
+	_coins_label.text = "Coins: %d" % value
+
+func show_game_lost_node() -> void:
 	_game_lost_node.show()
+
+func _on_retry_pressed() -> void:
+	get_tree().reload_current_scene()
+
+func _on_play_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/levels/game.tscn")
+
+func _on_quit_pressed() -> void:
+	get_tree().quit()

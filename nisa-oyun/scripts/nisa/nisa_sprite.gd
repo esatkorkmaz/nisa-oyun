@@ -5,15 +5,15 @@ extends AnimatedSprite2D
 @export var _hurt_color: Color = Color.RED
 
 func _process(delta: float) -> void:
-	var direction := Input.get_axis("move_left", "move_right")
+	var direction := Input.get_axis('move_left', 'move_right')
 	
 	_play_animation()
-	_rotate_sprite(-_controller._hit_direction if _controller._been_hit else (direction if _controller._input_enabled else 0.0))
+	_rotate_sprite(-_controller.hit_direction if _controller.been_hit else (direction if _controller.input_enabled else 0.0))
 
 func _play_animation() -> void:
 	var animation_to_play: String
 	
-	if(_controller._been_hit):
+	if(_controller.been_hit):
 		animation_to_play = 'hurt'
 		_hurt_effect()
 	elif(_controller.velocity.y != 0):
