@@ -6,9 +6,6 @@ var _lives_label: Label
 var _coins_label: Label
 var _game_lost_node: Node
 
-func _ready() -> void:
-	connect_buttons()
-
 func connect_buttons() -> void:
 	for node in get_tree().get_nodes_in_group("ui_buttons"):
 		match node.name:

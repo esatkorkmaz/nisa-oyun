@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://dyqowpt24q5b7"]
 
+[ext_resource type="Script" uid="uid://coekxc4p30rjs" path="res://scripts/levels/main_menu.gd" id="1_leamy"]
 [ext_resource type="Texture2D" uid="uid://g1cxfgti3qy7" path="res://assets/nisa/game_win.png" id="2_721jg"]
 
-[node name="MainMenu" type="Node2D" unique_id=689617236]
+[node name="MainMenu" type="Node" unique_id=1082441797]
+script = ExtResource("1_leamy")
 
 [node name="UI" type="Node" parent="." unique_id=833282667]
 

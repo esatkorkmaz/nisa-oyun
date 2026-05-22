@@ -29,13 +29,6 @@ var lives: int:
 		lives_changed.emit(_lives)
 		if _lives <= 0 and old_lives > 0:
 			game_lost.emit()
-			
-func _ready() -> void:
-	ui_manager.game_manager = self
-	
-	ui_manager.connect_buttons()
-	ui_manager.connect_labels()
-	ui_manager.connect_nodes()
 
 func add_coins(amount: int) -> void:
 	if amount <= 0:

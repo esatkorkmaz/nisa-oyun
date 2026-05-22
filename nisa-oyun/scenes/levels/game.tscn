@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b8bvtyuyv0vbv" path="res://assets/nisa/nisa_climb1.png" id="1_7rg7d"]
 [ext_resource type="Script" uid="uid://d2aa27v3vdgf2" path="res://scripts/nisa/nisa_controller.gd" id="1_cx7qy"]
+[ext_resource type="Script" uid="uid://c5v6eafw5btd0" path="res://scripts/levels/game.gd" id="1_d2m8s"]
 [ext_resource type="Texture2D" uid="uid://cm2gyhyt1tvat" path="res://assets/nisa/nisa.png" id="1_e6yxx"]
 [ext_resource type="Script" uid="uid://x1vxt6qoxuu5" path="res://scripts/managers/game_manager.gd" id="1_eiv1w"]
 [ext_resource type="Texture2D" uid="uid://bton3mgbnloup" path="res://assets/nisa/nisa_walk1.png" id="2_61jgc"]
@@ -78,7 +79,8 @@ size = Vector2(127.99996, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cx7qy"]
 size = Vector2(127.99999, 128)
 
-[node name="Game" type="Node2D" unique_id=1685804836]
+[node name="Game" type="Node" unique_id=1083707176]
+script = ExtResource("1_d2m8s")
 
 [node name="GameManager" type="Node" parent="." unique_id=1323465009]
 unique_name_in_owner = true
