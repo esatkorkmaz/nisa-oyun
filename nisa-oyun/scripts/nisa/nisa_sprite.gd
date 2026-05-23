@@ -13,22 +13,27 @@ func _process(delta: float) -> void:
 func _play_animation() -> void:
 	var animation_to_play: String
 	
-	if(_controller.been_hit):
+	if _controller.been_hit:
 		animation_to_play = 'hurt'
-		_hurt_effect()
-	elif(_controller.velocity.y != 0):
+	elif _controller.velocity.y != 0:
 		animation_to_play = 'jump' 
-	elif(_controller.velocity.x != 0):
+	elif _controller.velocity.x != 0:
 		animation_to_play = 'walk' 
 	else:
 		animation_to_play = 'idle' 
 	
+	if animation == animation_to_play and is_playing():
+		return
+	
 	play(animation_to_play)
+	
+	if animation_to_play == 'hurt':
+		_hurt_effect()
 
 func _rotate_sprite(direction: float) -> void:
-	if(direction > 0):
+	if direction > 0:
 		scale.x = 1
-	elif(direction < 0):
+	elif direction < 0:
 		scale.x = -1
 
 func _hurt_effect() -> void:

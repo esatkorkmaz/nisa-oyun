@@ -18,7 +18,7 @@ var been_hit: bool = false
 var hit_direction: float = -1.0
 
 func _physics_process(delta: float) -> void:
-	if(been_hit): 
+	if been_hit: 
 		_hit_timer -= delta
 	
 	if is_on_floor():
@@ -46,7 +46,7 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis('move_left', 'move_right')
 	
 	if input_enabled:
-		if direction && input_enabled:
+		if direction:
 			velocity.x = direction * _speed
 		else:
 			velocity.x = move_toward(velocity.x, 0, _speed)
@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 func hit(direction: float) -> void:
-	if(been_hit):
+	if been_hit:
 		return
 	
 	velocity.y = _hit_velocity
