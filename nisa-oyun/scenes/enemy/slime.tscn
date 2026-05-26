@@ -27,7 +27,7 @@ size = Vector2(127.99996, 128)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_wd25t")
-_speed = 400.0
+_speed = 200.0
 _patrol_left_node = NodePath("../PatrolLeft")
 _patrol_right_node = NodePath("../PatrolRight")
 

@@ -19,6 +19,12 @@ config/icon="res://icon.svg"
 
 ui_manager="*uid://sdndex3ywpxl"
 
+[display]
+
+window/size/window_width_override=1920
+window/size/window_height_override=1080
+window/stretch/mode="canvas_items"
+
 [editor_plugins]
 
 enabled=PackedStringArray()

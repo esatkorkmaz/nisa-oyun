@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal on_player_been_hit(knockback: bool)
+
 const _COYOTE_TIME: float = 0.12
 const _JUMP_BUFFER_TIME: float = 0.1
 
@@ -8,14 +10,18 @@ const _JUMP_BUFFER_TIME: float = 0.1
 @export var _jump_velocity: float = -1200.0
 @export var _hit_velocity: float = -1200.0
 
+
+
 var _coyote_timer: float = 0.0
 var _jump_buffer_timer: float = 0.0
 var _hit_timer: float = 0.0
 
 var input_enabled: bool = true
 var been_hit: bool = false
-
 var hit_direction: float = -1.0
+
+var auto_move_target: Node2D = null
+const _AUTO_MOVE_THRESHOLD: float = 10.0
 
 func _ready() -> void:
 	wall_min_slide_angle = deg_to_rad(10)
@@ -53,6 +59,13 @@ func _physics_process(delta: float) -> void:
 			velocity.x = direction * _speed
 		else:
 			velocity.x = move_toward(velocity.x, 0, _speed)
+	elif auto_move_target != null:
+		var diff := auto_move_target.global_position.x - global_position.x
+		if abs(diff) > _AUTO_MOVE_THRESHOLD:
+			velocity.x = sign(diff) * _speed
+		else:
+			velocity.x = move_toward(velocity.x, 0, _speed)
+			auto_move_target = null
 	
 	move_and_slide()
 	
@@ -68,6 +81,7 @@ func hit(knockback: bool, direction: float = 0) -> void:
 		_hit_timer = 0.05
 	
 	been_hit = true
+	on_player_been_hit.emit(knockback)
 	
 	%GameManager.lose_life()
 
