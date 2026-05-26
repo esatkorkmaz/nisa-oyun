@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dyqowpt24q5b7"]
 
 [ext_resource type="Script" uid="uid://coekxc4p30rjs" path="res://scripts/levels/main_menu.gd" id="1_leamy"]
-[ext_resource type="Texture2D" uid="uid://g1cxfgti3qy7" path="res://assets/nisa/game_win.png" id="2_721jg"]
+[ext_resource type="Texture2D" uid="uid://clc8qt8afxcq4" path="res://assets/nisa/main_menu.png" id="2_leamy"]
 
 [node name="MainMenu" type="Node" unique_id=1082441797]
 script = ExtResource("1_leamy")
@@ -25,7 +25,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_721jg")
+texture = ExtResource("2_leamy")
 expand_mode = 1
 
 [node name="PlayButton" type="Button" parent="UI/CanvasLayer/MainMenu" unique_id=814424963 groups=["ui_buttons"]]

@@ -41,8 +41,12 @@ func spend_coins(amount: int) -> bool:
 	coins -= amount
 	return true
 
-func add_life() -> void:
+func add_life() -> bool:
+	if lives == _MAX_LIVES: return false
+	
 	lives += 1
+	
+	return true
 
 func lose_life() -> void:
 	lives -= 1

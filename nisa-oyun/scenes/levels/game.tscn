@@ -13,8 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://c73myf5fpjh2" path="res://assets/nisa/nisa_walk2.png" id="3_riktp"]
 [ext_resource type="Texture2D" uid="uid://w2isbmegytpq" path="res://assets/nisa/nisa_jump.png" id="5_uk881"]
 [ext_resource type="Texture2D" uid="uid://deioc71y3d265" path="res://assets/Tiles/Double/block_red.png" id="8_xmnyv"]
-[ext_resource type="Script" uid="uid://coo5qhtw0ehlc" path="res://scripts/enemy/enemy_controller.gd" id="9_r0gsk"]
-[ext_resource type="Texture2D" uid="uid://csgi424dvkd3k" path="res://assets/Enemies/Double/bee_a.png" id="9_uk881"]
 [ext_resource type="Script" uid="uid://bauimun64ejv7" path="res://scripts/nisa/nisa_sprite.gd" id="12_bgnkb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_r0gsk"]
@@ -70,9 +68,6 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cx7qy"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0gsk"]
-size = Vector2(127.99996, 128)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xmnyv"]
 
@@ -211,29 +206,6 @@ position = Vector2(0, -120)
 scale = Vector2(6.28, 8.040003)
 shape = SubResource("CapsuleShape2D_cx7qy")
 
-[node name="Enemy" type="Node" parent="." unique_id=949850394]
-
-[node name="EnemyController" type="Area2D" parent="Enemy" unique_id=790914868 node_paths=PackedStringArray("_patrol_left_node", "_patrol_right_node")]
-position = Vector2(1152, 960)
-collision_layer = 4
-collision_mask = 2
-script = ExtResource("9_r0gsk")
-_speed = 800.0
-_patrol_left_node = NodePath("../PatrolLeft")
-_patrol_right_node = NodePath("../PatrolRight")
-
-[node name="Sprite2D" type="Sprite2D" parent="Enemy/EnemyController" unique_id=471293803]
-texture = ExtResource("9_uk881")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/EnemyController" unique_id=769827878]
-shape = SubResource("RectangleShape2D_r0gsk")
-
-[node name="PatrolLeft" type="Marker2D" parent="Enemy" unique_id=1343256138]
-position = Vector2(896, 960)
-
-[node name="PatrolRight" type="Marker2D" parent="Enemy" unique_id=1514950676]
-position = Vector2(1408, 960)
-
 [node name="Block" type="Node" parent="." unique_id=1076524694]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Block" unique_id=582304601]
@@ -248,5 +220,3 @@ shape = SubResource("RectangleShape2D_cx7qy")
 [node name="Sprite2D" type="Sprite2D" parent="Block/StaticBody2D" unique_id=921812320]
 position = Vector2(0, 128)
 texture = ExtResource("8_xmnyv")
-
-[connection signal="body_entered" from="Enemy/EnemyController" to="Enemy/EnemyController" method="_on_body_entered"]

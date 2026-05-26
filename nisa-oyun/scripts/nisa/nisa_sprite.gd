@@ -22,7 +22,7 @@ func _play_animation() -> void:
 	else:
 		animation_to_play = 'idle' 
 	
-	if animation == animation_to_play and is_playing():
+	if animation == animation_to_play:
 		return
 	
 	play(animation_to_play)

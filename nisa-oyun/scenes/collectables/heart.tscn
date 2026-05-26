@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bv1ieitfwdbdk"]
+
+[ext_resource type="Script" uid="uid://cmxot78u652n3" path="res://scripts/collectables/heart.gd" id="1_27lib"]
+[ext_resource type="Texture2D" uid="uid://n24dbh56r8yv" path="res://assets/Tiles/Double/heart.png" id="2_stgmx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0gsk"]
+size = Vector2(127.99996, 128)
+
+[node name="Heart" type="Node" unique_id=396403000]
+
+[node name="Heart" type="Area2D" parent="." unique_id=213151544]
+position = Vector2(1536, 960)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_27lib")
+
+[node name="Sprite2D" type="Sprite2D" parent="Heart" unique_id=1611387506]
+z_index = -1
+texture = ExtResource("2_stgmx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Heart" unique_id=2042611178]
+shape = SubResource("RectangleShape2D_r0gsk")
+
+[connection signal="body_entered" from="Heart" to="Heart" method="_on_body_entered"]
