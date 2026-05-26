@@ -21,7 +21,7 @@ ui_manager="*uid://sdndex3ywpxl"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_sparrow/plugin.cfg", "res://addons/kenny_spritesheet_importer/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 
@@ -49,6 +49,7 @@ move_right={
 
 [physics]
 
+common/physics_ticks_per_second=120
 3d/physics_engine="Jolt Physics"
 
 [rendering]
