@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 ui_manager="*uid://sdndex3ywpxl"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_sparrow/plugin.cfg", "res://addons/kenny_spritesheet_importer/plugin.cfg")
+
 [input]
 
 jump={

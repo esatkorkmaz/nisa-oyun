@@ -12,8 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://g1cxfgti3qy7" path="res://assets/nisa/game_win.png" id="3_fojqs"]
 [ext_resource type="Texture2D" uid="uid://c73myf5fpjh2" path="res://assets/nisa/nisa_walk2.png" id="3_riktp"]
 [ext_resource type="Texture2D" uid="uid://w2isbmegytpq" path="res://assets/nisa/nisa_jump.png" id="5_uk881"]
-[ext_resource type="Texture2D" uid="uid://deioc71y3d265" path="res://assets/Tiles/Double/block_red.png" id="8_xmnyv"]
 [ext_resource type="Script" uid="uid://bauimun64ejv7" path="res://scripts/nisa/nisa_sprite.gd" id="12_bgnkb"]
+[ext_resource type="TileSet" uid="uid://dw5pyrnth6bgc" path="res://assets/Tilemap/spritesheet-tiles-double.tres" id="14_fojqs"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_r0gsk"]
 font_size = 32
@@ -68,11 +68,6 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cx7qy"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xmnyv"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cx7qy"]
-size = Vector2(127.99999, 128)
 
 [node name="Game" type="Node" unique_id=1083707176]
 script = ExtResource("1_d2m8s")
@@ -206,17 +201,6 @@ position = Vector2(0, -120)
 scale = Vector2(6.28, 8.040003)
 shape = SubResource("CapsuleShape2D_cx7qy")
 
-[node name="Block" type="Node" parent="." unique_id=1076524694]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Block" unique_id=582304601]
-position = Vector2(1120, 1024)
-scale = Vector2(10, 1)
-physics_material_override = SubResource("PhysicsMaterial_xmnyv")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Block/StaticBody2D" unique_id=1453585337]
-position = Vector2(0, 128)
-shape = SubResource("RectangleShape2D_cx7qy")
-
-[node name="Sprite2D" type="Sprite2D" parent="Block/StaticBody2D" unique_id=921812320]
-position = Vector2(0, 128)
-texture = ExtResource("8_xmnyv")
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=43337525]
+tile_map_data = PackedByteArray(0, 0, 6, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_set = ExtResource("14_fojqs")
