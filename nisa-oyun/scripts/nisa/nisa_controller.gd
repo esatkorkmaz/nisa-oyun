@@ -17,6 +17,9 @@ var been_hit: bool = false
 
 var hit_direction: float = -1.0
 
+func _ready() -> void:
+	wall_min_slide_angle = deg_to_rad(10)
+
 func _physics_process(delta: float) -> void:
 	if been_hit: 
 		_hit_timer -= delta
