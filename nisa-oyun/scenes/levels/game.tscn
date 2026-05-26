@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://bauimun64ejv7" path="res://scripts/nisa/nisa_sprite.gd" id="12_bgnkb"]
 [ext_resource type="TileSet" uid="uid://dw5pyrnth6bgc" path="res://assets/Tilemap/spritesheet-tiles-double.tres" id="14_fojqs"]
 [ext_resource type="Script" uid="uid://i23rflgn0svv" path="res://scripts/environment/void.gd" id="15_bgnkb"]
+[ext_resource type="PackedScene" uid="uid://e0o3s320sqtj" path="res://scenes/enemy/slime.tscn" id="16_eiv1w"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_r0gsk"]
 font_size = 32
@@ -184,26 +185,24 @@ theme_override_font_sizes/font_size = 24
 text = "Çıkış"
 language = "tr"
 
-[node name="Nisa" type="Node" parent="." unique_id=1690504094]
-
-[node name="NisaController" type="CharacterBody2D" parent="Nisa" unique_id=979561]
+[node name="NisaController" type="CharacterBody2D" parent="." unique_id=979561]
 position = Vector2(320, 896)
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_cx7qy")
 
-[node name="NisaSprite" type="AnimatedSprite2D" parent="Nisa/NisaController" unique_id=1941968902]
+[node name="NisaSprite" type="AnimatedSprite2D" parent="NisaController" unique_id=1941968902]
 position = Vector2(0, -126)
 sprite_frames = SubResource("SpriteFrames_2exa0")
 animation = &"idle"
 script = ExtResource("12_bgnkb")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Nisa/NisaController" unique_id=415046493]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NisaController" unique_id=415046493]
 position = Vector2(0, -120)
 scale = Vector2(6.28, 8.040003)
 shape = SubResource("CapsuleShape2D_cx7qy")
 
-[node name="Camera2D" type="Camera2D" parent="Nisa/NisaController" unique_id=2019256701]
+[node name="Camera2D" type="Camera2D" parent="NisaController" unique_id=2019256701]
 position = Vector2(832, -376)
 zoom = Vector2(0.5, 0.5)
 limit_left = 0
@@ -233,19 +232,104 @@ shape = SubResource("WorldBoundaryShape2D_fojqs")
 tile_map_data = PackedByteArray("AAAVAAgAAAAIAAkAAAAVAAcAAAALAAkAAAAWAAcAAAANAAkAAAAUAAcAAAALAAkAAAAUAAgAAAAIAAkAAAATAAgAAAAIAAkAAAATAAcAAAALAAkAAAASAAcAAAALAAkAAAASAAgAAAAIAAkAAAARAAgAAAAIAAkAAAARAAcAAAALAAkAAAAQAAcAAAALAAkAAAAPAAcAAAALAAkAAAAPAAgAAAAIAAkAAAAQAAgAAAAIAAkAAAAQAAkAAAAIAAkAAAARAAkAAAAIAAkAAAAPAAkAAAAIAAkAAAAOAAkAAAAIAAkAAAANAAkAAAAIAAkAAAANAAgAAAAIAAkAAAAOAAgAAAAIAAkAAAAOAAcAAAALAAkAAAANAAcAAAALAAkAAAAMAAcAAAALAAkAAAAMAAgAAAAIAAkAAAAMAAkAAAAIAAkAAAALAAkAAAAIAAkAAAAKAAkAAAAIAAkAAAAKAAgAAAAIAAkAAAALAAgAAAAIAAkAAAALAAcAAAALAAkAAAAKAAcAAAALAAkAAAAJAAcAAAALAAkAAAAJAAgAAAAIAAkAAAAJAAkAAAAIAAkAAAAIAAkAAAAIAAkAAAAIAAgAAAAIAAkAAAAIAAcAAAALAAkAAAAHAAcAAAALAAkAAAAHAAgAAAAIAAkAAAAHAAkAAAAIAAkAAAAGAAkAAAAIAAkAAAAGAAgAAAAIAAkAAAAGAAcAAAALAAkAAAAFAAcAAAALAAkAAAAEAAcAAAALAAkAAAAEAAgAAAAIAAkAAAAEAAkAAAAIAAkAAAAFAAkAAAAIAAkAAAAFAAgAAAAIAAkAAAADAAgAAAAIAAkAAAACAAgAAAAIAAkAAAACAAkAAAAIAAkAAAADAAkAAAAIAAkAAAADAAcAAAALAAkAAAACAAcAAAALAAkAAAABAAcAAAALAAkAAAABAAgAAAAIAAkAAAAAAAgAAAAIAAkAAAAAAAkAAAAIAAkAAAAAAAcAAAALAAkAAAABAAkAAAAIAAkAAAASAAkAAAAIAAkAAAATAAkAAAAIAAkAAAAUAAkAAAAIAAkAAAAVAAkAAAAIAAkAAAAaAAcAAAAMAAkAAAAbAAcAAAALAAkAAAAcAAcAAAALAAkAAAAdAAcAAAALAAkAAAAeAAcAAAALAAkAAAAfAAcAAAALAAkAAAAgAAcAAAALAAkAAAAhAAcAAAALAAkAAAAiAAcAAAALAAkAAAAjAAcAAAALAAkAAAAkAAcAAAALAAkAAAAlAAcAAAALAAkAAAAmAAcAAAALAAkAAAAnAAcAAAALAAkAAAAoAAcAAAALAAkAAAApAAcAAAANAAkAAAAtAAcAAAAMAAkAAAAuAAcAAAALAAkAAAAvAAcAAAALAAkAAAAwAAcAAAALAAkAAAAxAAcAAAALAAkAAAAyAAcAAAALAAkAAAAzAAcAAAALAAkAAAA0AAcAAAANAAkAAAA4AAcAAAAMAAkAAAA5AAcAAAALAAkAAAA6AAcAAAALAAkAAAA7AAcAAAALAAkAAAA8AAcAAAALAAkAAAA9AAcAAAALAAkAAAA+AAcAAAALAAkAAAA/AAcAAAALAAkAAABAAAcAAAALAAkAAABBAAcAAAALAAkAAABCAAcAAAALAAkAAABDAAcAAAANAAkAAABHAAcAAAAMAAkAAABIAAcAAAALAAkAAABJAAcAAAALAAkAAABKAAcAAAALAAkAAABLAAcAAAALAAkAAABMAAcAAAALAAkAAABNAAcAAAALAAkAAABOAAcAAAALAAkAAABPAAcAAAALAAkAAABQAAcAAAALAAkAAABRAAcAAAALAAkAAABSAAcAAAANAAkAAABWAAcAAAAMAAkAAABXAAcAAAALAAkAAABYAAcAAAALAAkAAABZAAcAAAALAAkAAABaAAcAAAALAAkAAABbAAcAAAALAAkAAABcAAcAAAALAAkAAABdAAcAAAANAAkAAABhAAcAAAAMAAkAAABjAAcAAAALAAkAAABkAAcAAAALAAkAAABlAAcAAAALAAkAAABmAAcAAAALAAkAAABnAAcAAAALAAkAAABoAAcAAAALAAkAAABpAAcAAAALAAkAAABqAAcAAAALAAkAAABrAAcAAAALAAkAAABsAAcAAAALAAkAAABtAAcAAAALAAkAAABuAAcAAAALAAkAAABvAAcAAAALAAkAAABwAAcAAAANAAkAAAB0AAcAAAAMAAkAAAB1AAcAAAALAAkAAAB2AAcAAAALAAkAAAB3AAcAAAALAAkAAAB4AAcAAAALAAkAAAB5AAcAAAALAAkAAAB6AAcAAAALAAkAAAB7AAcAAAALAAkAAAB8AAcAAAALAAkAAAB9AAcAAAALAAkAAAB+AAcAAAALAAkAAAB/AAcAAAALAAkAAACAAAcAAAALAAkAAACBAAcAAAALAAkAAACCAAcAAAALAAkAAACDAAcAAAALAAkAAACDAAgAAAAIAAkAAACDAAkAAAAIAAkAAACCAAkAAAAIAAkAAACCAAgAAAAIAAkAAACBAAgAAAAIAAkAAACBAAkAAAAIAAkAAAAaAAgAAAAJAAkAAAAbAAkAAAAIAAkAAAAcAAkAAAAIAAkAAAAcAAgAAAAIAAkAAAAbAAgAAAAIAAkAAAAaAAkAAAAJAAkAAAAdAAgAAAAIAAkAAAAdAAkAAAAIAAkAAAAeAAgAAAAIAAkAAAAeAAkAAAAIAAkAAAAfAAgAAAAIAAkAAAAfAAkAAAAIAAkAAAAgAAgAAAAIAAkAAAAgAAkAAAAIAAkAAAAhAAkAAAAIAAkAAAAhAAgAAAAIAAkAAAAiAAkAAAAIAAkAAAAiAAgAAAAIAAkAAAAjAAkAAAAIAAkAAAAjAAgAAAAIAAkAAAAkAAkAAAAIAAkAAAAkAAgAAAAIAAkAAAAlAAgAAAAIAAkAAAAlAAkAAAAIAAkAAAAmAAgAAAAIAAkAAAAmAAkAAAAIAAkAAAAnAAgAAAAIAAkAAAAnAAkAAAAIAAkAAAAoAAgAAAAIAAkAAAAoAAkAAAAIAAkAAAApAAkAAAAKAAkAAAApAAgAAAAKAAkAAAAtAAgAAAAJAAkAAAAtAAkAAAAJAAkAAAAuAAkAAAAIAAkAAAAuAAgAAAAIAAkAAAAvAAgAAAAIAAkAAAAvAAkAAAAIAAkAAAAwAAgAAAAIAAkAAAAxAAgAAAAIAAkAAAAxAAkAAAAIAAkAAAAwAAkAAAAIAAkAAAAyAAgAAAAIAAkAAAAyAAkAAAAIAAkAAAAzAAkAAAAIAAkAAAAzAAgAAAAIAAkAAAA0AAgAAAAKAAkAAAA0AAkAAAAKAAkAAAA4AAgAAAAJAAkAAAA4AAkAAAAJAAkAAAA5AAkAAAAIAAkAAAA5AAgAAAAIAAkAAAA6AAgAAAAIAAkAAAA6AAkAAAAIAAkAAAA7AAkAAAAIAAkAAAA7AAgAAAAIAAkAAAA8AAgAAAAIAAkAAAA8AAkAAAAIAAkAAAA9AAgAAAAIAAkAAAA9AAkAAAAIAAkAAAA+AAkAAAAIAAkAAAA+AAgAAAAIAAkAAAA/AAgAAAAIAAkAAAA/AAkAAAAIAAkAAABAAAgAAAAIAAkAAABAAAkAAAAIAAkAAABBAAgAAAAIAAkAAABCAAgAAAAIAAkAAABCAAkAAAAIAAkAAABDAAgAAAAKAAkAAABDAAkAAAAKAAkAAABBAAkAAAAIAAkAAABHAAgAAAAJAAkAAABHAAkAAAAJAAkAAABIAAkAAAAIAAkAAABIAAgAAAAIAAkAAABJAAkAAAAIAAkAAABJAAgAAAAIAAkAAABKAAgAAAAIAAkAAABKAAkAAAAIAAkAAABLAAgAAAAIAAkAAABLAAkAAAAIAAkAAABMAAkAAAAIAAkAAABMAAgAAAAIAAkAAABNAAgAAAAIAAkAAABNAAkAAAAIAAkAAABOAAkAAAAIAAkAAABOAAgAAAAIAAkAAABPAAgAAAAIAAkAAABPAAkAAAAIAAkAAABQAAkAAAAIAAkAAABQAAgAAAAIAAkAAABRAAkAAAAIAAkAAABRAAgAAAAIAAkAAABSAAgAAAAKAAkAAABSAAkAAAAKAAkAAABWAAgAAAAJAAkAAABWAAkAAAAJAAkAAABXAAkAAAAIAAkAAABXAAgAAAAIAAkAAABYAAgAAAAIAAkAAABZAAgAAAAIAAkAAABZAAkAAAAIAAkAAABaAAkAAAAIAAkAAABbAAkAAAAIAAkAAABbAAgAAAAIAAkAAABaAAgAAAAIAAkAAABYAAkAAAAIAAkAAABcAAkAAAAIAAkAAABcAAgAAAAIAAkAAABdAAgAAAAKAAkAAABdAAkAAAAKAAkAAABiAAkAAAAIAAkAAABjAAkAAAAIAAkAAABhAAkAAAAJAAkAAABkAAkAAAAIAAkAAABlAAkAAAAIAAkAAABoAAkAAAAIAAkAAABnAAkAAAAIAAkAAABmAAkAAAAIAAkAAABpAAkAAAAIAAkAAABqAAkAAAAIAAkAAABrAAkAAAAIAAkAAABsAAkAAAAIAAkAAABsAAgAAAAIAAkAAABtAAgAAAAIAAkAAABtAAkAAAAIAAkAAABuAAkAAAAIAAkAAABuAAgAAAAIAAkAAABvAAgAAAAIAAkAAABvAAkAAAAIAAkAAABwAAkAAAAKAAkAAABwAAgAAAAKAAkAAAB0AAgAAAAJAAkAAAB0AAkAAAAJAAkAAAB1AAkAAAAIAAkAAAB1AAgAAAAIAAkAAAB2AAgAAAAIAAkAAAB2AAkAAAAIAAkAAAB3AAkAAAAIAAkAAAB3AAgAAAAIAAkAAAB4AAgAAAAIAAkAAAB4AAkAAAAIAAkAAAB5AAkAAAAIAAkAAAB5AAgAAAAIAAkAAAB6AAgAAAAIAAkAAAB6AAkAAAAIAAkAAAB7AAkAAAAIAAkAAAB7AAgAAAAIAAkAAAB8AAkAAAAIAAkAAAB8AAgAAAAIAAkAAAB9AAgAAAAIAAkAAAB9AAkAAAAIAAkAAAB+AAkAAAAIAAkAAAB+AAgAAAAIAAkAAAB/AAgAAAAIAAkAAAB/AAkAAAAIAAkAAACAAAkAAAAIAAkAAACAAAgAAAAIAAkAAABhAAgAAAAJAAkAAABiAAgAAAAIAAkAAABjAAgAAAAIAAkAAABkAAgAAAAIAAkAAABlAAgAAAAIAAkAAABmAAgAAAAIAAkAAABnAAgAAAAIAAkAAABoAAgAAAAIAAkAAABpAAgAAAAIAAkAAABqAAgAAAAIAAkAAABrAAgAAAAIAAkAAABiAAcAAAALAAkAAAAWAAgAAAAKAAkAAAAWAAkAAAAKAAkAAAA=")
 tile_set = ExtResource("14_fojqs")
 
-[node name="Void" type="Node" parent="Environment" unique_id=1890251461]
-
-[node name="VoidArea2D" type="Area2D" parent="Environment/Void" unique_id=291515506 node_paths=PackedStringArray("_teleport_node")]
+[node name="VoidArea2D" type="Area2D" parent="Environment" unique_id=291515506 node_paths=PackedStringArray("_teleport_node")]
 position = Vector2(3136, 1408)
 collision_mask = 2
 script = ExtResource("15_bgnkb")
 _teleport_node = NodePath("TeleportNode")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Void/VoidArea2D" unique_id=1503665735]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/VoidArea2D" unique_id=1503665735]
 shape = SubResource("RectangleShape2D_fojqs")
 
-[node name="TeleportNode" type="Marker2D" parent="Environment/Void/VoidArea2D" unique_id=674851500]
+[node name="TeleportNode" type="Marker2D" parent="Environment/VoidArea2D" unique_id=674851500]
 position = Vector2(-704, -960)
 rotation = 0.7853982
 
-[connection signal="body_entered" from="Environment/Void/VoidArea2D" to="Environment/Void/VoidArea2D" method="_on_body_entered"]
+[node name="VoidArea2D2" type="Area2D" parent="Environment" unique_id=139420258 node_paths=PackedStringArray("_teleport_node")]
+position = Vector2(5568, 1408)
+collision_mask = 2
+script = ExtResource("15_bgnkb")
+_teleport_node = NodePath("TeleportNode")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/VoidArea2D2" unique_id=1739604702]
+shape = SubResource("RectangleShape2D_fojqs")
+
+[node name="TeleportNode" type="Marker2D" parent="Environment/VoidArea2D2" unique_id=1527348752]
+position = Vector2(-704, -960)
+rotation = 0.7853982
+
+[node name="VoidArea2D3" type="Area2D" parent="Environment" unique_id=2077264880 node_paths=PackedStringArray("_teleport_node")]
+position = Vector2(6976, 1408)
+collision_mask = 2
+script = ExtResource("15_bgnkb")
+_teleport_node = NodePath("TeleportNode")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/VoidArea2D3" unique_id=903703906]
+shape = SubResource("RectangleShape2D_fojqs")
+
+[node name="TeleportNode" type="Marker2D" parent="Environment/VoidArea2D3" unique_id=2078413180]
+position = Vector2(-704, -960)
+rotation = 0.7853982
+
+[node name="VoidArea2D4" type="Area2D" parent="Environment" unique_id=457587623 node_paths=PackedStringArray("_teleport_node")]
+position = Vector2(8896, 1408)
+collision_mask = 2
+script = ExtResource("15_bgnkb")
+_teleport_node = NodePath("TeleportNode")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/VoidArea2D4" unique_id=1589641085]
+shape = SubResource("RectangleShape2D_fojqs")
+
+[node name="TeleportNode" type="Marker2D" parent="Environment/VoidArea2D4" unique_id=2004712788]
+position = Vector2(-704, -960)
+rotation = 0.7853982
+
+[node name="VoidArea2D5" type="Area2D" parent="Environment" unique_id=1397441329 node_paths=PackedStringArray("_teleport_node")]
+position = Vector2(10816, 1408)
+collision_mask = 2
+script = ExtResource("15_bgnkb")
+_teleport_node = NodePath("TeleportNode")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/VoidArea2D5" unique_id=1682391000]
+shape = SubResource("RectangleShape2D_fojqs")
+
+[node name="TeleportNode" type="Marker2D" parent="Environment/VoidArea2D5" unique_id=657676394]
+position = Vector2(-704, -960)
+rotation = 0.7853982
+
+[node name="VoidArea2D6" type="Area2D" parent="Environment" unique_id=273581501 node_paths=PackedStringArray("_teleport_node")]
+position = Vector2(12224, 1408)
+collision_mask = 2
+script = ExtResource("15_bgnkb")
+_teleport_node = NodePath("TeleportNode")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/VoidArea2D6" unique_id=755537144]
+shape = SubResource("RectangleShape2D_fojqs")
+
+[node name="TeleportNode" type="Marker2D" parent="Environment/VoidArea2D6" unique_id=1860648806]
+position = Vector2(-704, -960)
+rotation = 0.7853982
+
+[node name="VoidArea2D7" type="Area2D" parent="Environment" unique_id=1902436309 node_paths=PackedStringArray("_teleport_node")]
+position = Vector2(14656, 1408)
+collision_mask = 2
+script = ExtResource("15_bgnkb")
+_teleport_node = NodePath("TeleportNode")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/VoidArea2D7" unique_id=905419909]
+shape = SubResource("RectangleShape2D_fojqs")
+
+[node name="TeleportNode" type="Marker2D" parent="Environment/VoidArea2D7" unique_id=581897534]
+position = Vector2(-704, -960)
+rotation = 0.7853982
+
+[node name="Slime" parent="." unique_id=666599106 instance=ExtResource("16_eiv1w")]
+position = Vector2(1664, 832)
+
+[connection signal="body_entered" from="Environment/VoidArea2D" to="Environment/VoidArea2D" method="_on_body_entered"]
+[connection signal="body_entered" from="Environment/VoidArea2D2" to="Environment/VoidArea2D2" method="_on_body_entered"]
+[connection signal="body_entered" from="Environment/VoidArea2D3" to="Environment/VoidArea2D3" method="_on_body_entered"]
+[connection signal="body_entered" from="Environment/VoidArea2D4" to="Environment/VoidArea2D4" method="_on_body_entered"]
+[connection signal="body_entered" from="Environment/VoidArea2D5" to="Environment/VoidArea2D5" method="_on_body_entered"]
+[connection signal="body_entered" from="Environment/VoidArea2D6" to="Environment/VoidArea2D6" method="_on_body_entered"]
+[connection signal="body_entered" from="Environment/VoidArea2D7" to="Environment/VoidArea2D7" method="_on_body_entered"]

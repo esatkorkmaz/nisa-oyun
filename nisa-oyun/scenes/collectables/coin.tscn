@@ -6,19 +6,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0gsk"]
 size = Vector2(127.99996, 128)
 
-[node name="Coin" type="Node" unique_id=1916818844]
-
-[node name="Coin" type="Area2D" parent="." unique_id=1358517381]
-position = Vector2(768, 960)
-collision_layer = 4
-collision_mask = 2
+[node name="Coin" type="Area2D" unique_id=536356453]
 script = ExtResource("1_q6t3q")
 
-[node name="Sprite2D" type="Sprite2D" parent="Coin" unique_id=1957464536]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1957464536]
 z_index = -1
 texture = ExtResource("2_xvn0w")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Coin" unique_id=1503862386]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1503862386]
 shape = SubResource("RectangleShape2D_r0gsk")
 
-[connection signal="body_entered" from="Coin" to="Coin" method="_on_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://e0o3s320sqtj"]
+
+[ext_resource type="Script" uid="uid://coo5qhtw0ehlc" path="res://scripts/enemy/enemy_controller.gd" id="1_wd25t"]
+[ext_resource type="Texture2D" uid="uid://bqtsfqxao3mgx" path="res://assets/Enemies/Double/slime_fire_walk_a.png" id="2_wd25t"]
+[ext_resource type="Texture2D" uid="uid://r1a37mn1ofqy" path="res://assets/Enemies/Double/slime_fire_walk_b.png" id="3_qgvyr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0fu5l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wd25t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qgvyr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.5
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0gsk"]
+size = Vector2(127.99996, 128)
+
+[node name="Slime" type="Node2D" unique_id=666599106]
+
+[node name="EnemyController" type="Area2D" parent="." unique_id=1426419610 node_paths=PackedStringArray("_patrol_left_node", "_patrol_right_node")]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_wd25t")
+_speed = 400.0
+_patrol_left_node = NodePath("../PatrolLeft")
+_patrol_right_node = NodePath("../PatrolRight")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="EnemyController" unique_id=1622578799]
+sprite_frames = SubResource("SpriteFrames_0fu5l")
+autoplay = "default"
+frame_progress = 0.10607598
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyController" unique_id=666585246]
+shape = SubResource("RectangleShape2D_r0gsk")
+
+[node name="PatrolLeft" type="Marker2D" parent="." unique_id=1428117919]
+position = Vector2(-256, 0)
+
+[node name="PatrolRight" type="Marker2D" parent="." unique_id=522579121]
+position = Vector2(256, 0)
+
+[connection signal="body_entered" from="EnemyController" to="EnemyController" method="_on_body_entered"]

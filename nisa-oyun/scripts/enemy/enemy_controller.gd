@@ -1,5 +1,5 @@
 extends Area2D
-@onready var _animated_sprite: Sprite2D = $Sprite2D
+@onready var _animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @export var _speed: float = 150.0
 @export var _patrol_left_node: Node2D
 @export var _patrol_right_node: Node2D
