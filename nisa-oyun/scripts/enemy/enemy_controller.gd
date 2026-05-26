@@ -31,4 +31,4 @@ func _on_direction_changed(new_direction: int) -> void:
 
 func _on_body_entered(body: CharacterBody2D) -> void:
 	var direction = sign(body.global_position.x - global_position.x)
-	body.hit(direction)
+	body.hit(true, direction)

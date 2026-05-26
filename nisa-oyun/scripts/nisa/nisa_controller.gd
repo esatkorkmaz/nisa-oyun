@@ -53,20 +53,20 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
-func hit(direction: float) -> void:
+func hit(knockback: bool, direction: float = 0) -> void:
 	if been_hit:
 		return
 	
-	velocity.y = _hit_velocity
-	velocity.x = _hit_velocity / 3 * (-1 if direction > 0 else 1)
+	if knockback:
+		velocity.y = _hit_velocity
+		velocity.x = _hit_velocity / 3 * (-1 if direction > 0 else 1)
 	
-	input_enabled = false
+		input_enabled = false
+		_hit_timer = 0.05
+	
 	been_hit = true
 	
 	%GameManager.lose_life()
-	
-	_hit_timer = 0.05
-	
 
 func _can_jump() -> bool:
 	var coyote_ok = _coyote_timer > 0.0
