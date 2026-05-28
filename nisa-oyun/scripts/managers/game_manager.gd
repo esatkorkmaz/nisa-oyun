@@ -4,9 +4,9 @@ signal coins_changed(new_value: int)
 signal lives_changed(new_value: int)
 signal game_lost()
 
-const _START_LIVES: int = 3
+const _START_LIVES: int = 2
 const _START_COINS: int = 0
-const _MAX_LIVES: int = 5
+const _MAX_LIVES: int = 3
 const _MIN_LIVES: int = 0
 const _MIN_COINS: int = 0
 

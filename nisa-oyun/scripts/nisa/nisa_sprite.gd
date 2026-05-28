@@ -15,6 +15,8 @@ func _play_animation() -> void:
 	
 	if _controller.been_hit:
 		animation_to_play = 'hurt'
+	elif _controller.is_on_ladder:
+		animation_to_play = 'climb'
 	elif _controller.velocity.y != 0:
 		animation_to_play = 'jump' 
 	elif _controller.velocity.x != 0:
